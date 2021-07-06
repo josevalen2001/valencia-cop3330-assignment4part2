@@ -1,0 +1,96 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class TodoList {
+
+    + main()
+    + start()
+
+}
+
+class TodoListController {
+
+    + addListBtnClicked(ActionEvent actionEvent)
+    + editListBtnClicked(ActionEvent actionEvent)
+    + removeListBtnClicked(ActionEvent actionEvent)
+    + exportSelectedBtnClicked(ActionEvent actionEvent)
+    + importListBtnClicked(ActionEvent actionEvent)
+    + addTaskBtnClicked(ActionEvent actionEvent)
+    + editTaskBtnClicked(ActionEvent actionEvent)
+    + viewAllTasksBtnClicked(ActionEvent actionEvent)
+    + viewCompletedBtnClicked(ActionEvent actionEvent)
+    + viewNotCompletedBtnClicked(ActionEvent actionEvent)
+    + markAsCompletedBtnClicked(ActionEvent actionEvent)
+    + removeTaskBtnClicked(ActionEvent actionEvent)
+    + sortByDateBtnClicked(ActionEvent actionEvent)
+
+}
+
+class AllLists {
+
+    ArrayList<List> listsInProgram
+
+    + createAllLists()
+
+    + addList(List list)
+    + removeList(List list)
+    + editList(List list)
+    + importList(File file)
+    + exportList(File file, List list)
+
+
+}
+
+class List {
+
+    String name
+    ArrayList<Tasks> tasks
+
+    + createList(String name)
+
+    + setName(String name)
+    + getName()
+    + getTasks()
+
+    + addTask(Task task)
+    + editTask(Task task)
+    + removeTask(Task task)
+    + markTaskCompleted(Boolean completed)
+    + showCompleteTasks()
+    + showIncompleteTasks()
+    + showAllTasks()
+    + sortByDate()
+
+    + toString()
+
+
+}
+
+class Task {
+
+    String desc
+    String date
+    Boolean completed
+
+    + createTask(String desc, String date, Boolean completed)
+
+    + setDesc(String desc)
+    + setDate(String date)
+    + setCompleted(Boolean completed)
+    + getDesc()
+    + getDate()
+    + getCompleted()
+
+    + toString()
+
+
+}
+
+javafx.Application <|-- TodoList
+TodoList -- TodoListController
+TodoListController *-> AllLists
+AllLists *--> List
+List *--> Task
+
+
+@enduml
