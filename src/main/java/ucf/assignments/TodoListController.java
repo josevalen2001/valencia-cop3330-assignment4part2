@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 
 public class TodoListController {
 
-    //First we have to create a AllList object and set the listViews to be visible and display
+    //We have to create a AllList object and set the listViews to be visible and display
     //The list view for the lists will always display the ArrayList of lists in our AllList object
     //The list view for the tasks will change depending on what list is selected
 
