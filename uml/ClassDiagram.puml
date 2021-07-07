@@ -15,27 +15,58 @@ class TodoList {
 
 class TodoListController {
 
-    + addListBtnClicked(ActionEvent actionEvent)
-    + editListBtnClicked(ActionEvent actionEvent)
-    + removeListBtnClicked(ActionEvent actionEvent)
-    + exportSelectedBtnClicked(ActionEvent actionEvent)
-    + importListBtnClicked(ActionEvent actionEvent)
-    + addTaskBtnClicked(ActionEvent actionEvent)
-    + editTaskBtnClicked(ActionEvent actionEvent)
-    + viewAllTasksBtnClicked(ActionEvent actionEvent)
-    + viewCompletedBtnClicked(ActionEvent actionEvent)
-    + viewNotCompletedBtnClicked(ActionEvent actionEvent)
-    + markAsCompletedBtnClicked(ActionEvent actionEvent)
-    + removeTaskBtnClicked(ActionEvent actionEvent)
-    + sortByDateBtnClicked(ActionEvent actionEvent)
+    AllLists lists
+    ObservableList listOfLists
+    ObservableList listOfTasks
 
+    - ListView<String> mainListView
+    - ListView<String> taskListView
+
+    - TextField newListName
+    - TextField editListName
+    - TextField newTaskName
+    - TextField editTaskName
+
+    - DatePicker addDatePicker
+    - DatePicker editTaskDatePicker
+
+    - Button addListBtn
+    - Button addTaskBtn
+    - Button editListBtn
+    - Button editTaskBtn
+    - Button removeListBtn
+    - Button removeTaskBtn
+    - Button markAsCompletedBtn
+    - Button viewAllTasksBtn
+    - Button viewCompletedBtn
+    - Button viewNotCompletedBtn
+    - Button sortByDateBtn
+    - Button exportSelectedBtn
+    - Button importListBtn
+
+    + initialize(URL url, ResourceBundle rb)
+
+    - updateTaskListView()
+    - addListBtnClicked(Event e)
+    - addTaskBtnClicked(Event e)
+    - editListBtnClicked(Event e)
+    - editTaskBtnClicked(Event e)
+    - removeListBtnClicked(Event e)
+    - removeTaskBtnClicked(Event e)
+    - markAsCompletedBtnClicked(Event e)
+    - viewAllTasksBtnClicked(Event e)
+    - viewCompletedBtnClicked(Event e)
+    - viewNotCompletedBtnClicked(Event e)
+    - exportSelectedBtnClicked(Event e)
+    - importListBtnClicked(Event e)
+    - sortByDateBtnClicked(Event e)
 }
 
 class AllLists {
 
     ArrayList<List> listsInProgram
 
-    + createAllLists()
+    + AllLists()
 
     + addList(List list)
     + removeList(String list)
@@ -51,7 +82,7 @@ class List {
     String name
     ArrayList<Tasks> tasks
 
-    + createList(String name)
+    + List(String name)
 
     + setName(String name)
     + getName()
@@ -77,7 +108,7 @@ class Task {
     String date
     Boolean completed
 
-    + createTask(String desc, String date, Boolean completed)
+    + Task(String desc, String date, Boolean completed)
 
     + setDesc(String desc)
     + setDate(String date)
@@ -91,6 +122,7 @@ class Task {
 
 }
 
+javafx.Initializable <|--- TodoListController
 javafx.Application <|-- TodoList
 TodoList -- TodoListController
 TodoListController *-> AllLists

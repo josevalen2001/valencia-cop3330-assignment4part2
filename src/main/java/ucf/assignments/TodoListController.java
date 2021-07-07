@@ -183,7 +183,7 @@ public class TodoListController implements Initializable {
     @FXML
     private void editListBtnClicked(Event e) {
 
-        //Exit the function if the user did not enter a new name for the task.
+        //Exit the function if the user did not enter a new name for the list.
         //This means that the button will be clicked, but nothing will happen.
         if(editListName.getText().isEmpty())
             return;
@@ -195,7 +195,7 @@ public class TodoListController implements Initializable {
         for(int i = 0; i < lists.listsInProgram.size(); i++)
             //Find the list that is selected by comparing the name of each list to the one we have saved.
             if(lists.listsInProgram.get(i).getName().equals(listName)) {
-                //Once the list is found we can modify its name with the setName function in the List class.
+                //Once the list is found modify its name with the setName function in the List class.
                 lists.listsInProgram.get(i).setName(editListName.getText());
                 //Exit the for loop.
                 break;
@@ -212,127 +212,185 @@ public class TodoListController implements Initializable {
 
     }
 
-    //
+    //Create a function to edit the task selected by the user.
     @FXML
     private void editTaskBtnClicked(Event e) {
 
+        //Exit the function if the user did not enter a new name for the task.
+        //This means that the button will be clicked, but nothing will happen.
         if(editTaskName.getText().isEmpty())
             return;
 
+        //If the user did not enter a new date for the task, make the DatePicker default to today's date. This date can be changed later.
         editTaskDatePicker.setValue(Optional.ofNullable(editTaskDatePicker.getValue()).orElse(LocalDate.now()));
 
+        //Save the name of the task selected.
         String taskName = taskListView.getSelectionModel().getSelectedItem();
+
+        //Save the new date for the task.
         String date = editTaskDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        //Create a temporary list to save the list in which our task is found.
+        //We will use this list to update the items of our task ListView once a task is modified.
         List temp = new List("a");
 
+        //Run through the list of lists in the program in our AllList class.
         for(int i = 0; i < lists.listsInProgram.size(); i++) {
+           //Run through the list of tasks each list of the AllList class.
             for(int j = 0; j < lists.listsInProgram.get(i).tasks.size(); j++) {
+                //Find the task that is selected by comparing the information of each task to the one we have saved.
                 if(lists.listsInProgram.get(i).tasks.get(j).toString().equals(taskName)) {
+                    //Once the task selected is found modify it by using the setDesc and setDate methods in the Task class.
                     lists.listsInProgram.get(i).tasks.get(j).setDesc(editTaskName.getText());
                     lists.listsInProgram.get(i).tasks.get(j).setDate(date);
+
+                    //Save the list we found the modified task on to the temp list.
                     temp = lists.listsInProgram.get(i);
+
+                    //Exit the for loop.
                     break;
                 }
             }
         }
 
+        //Clear the ObservableList of tasks.
         listOfTasks.clear();
+        //Update the ObservableList of tasks with the list that contains the updated tasks.
         for(int i = 0; i < temp.tasks.size(); i++)
             listOfTasks.add(temp.tasks.get(i));
 
+        //Set the TextField and DatePicker the user just used so that is easier for the user to modify another task.
         editTaskName.setText("");
         editTaskDatePicker.setValue(null);
 
+        //Update the task ListView.
         updateTaskListView();
 
 
     }
 
+    //Create a function to remove the list that the user has selected.
     @FXML
     private void removeListBtnClicked(Event e) {
 
-
+        //Save the name of the list that the user has selected.
         String listName = mainListView.getSelectionModel().getSelectedItem();
 
+        //Run through the list of lists in the program in our AllList class.
         for(int i = 0; i < lists.listsInProgram.size(); i++)
+            //Find the list that is selected by comparing the name of each list to the one we have saved.
             if(lists.listsInProgram.get(i).getName().equals(listName)) {
+                //Remove the list selected from the list of lists in our AllList object.
                 lists.listsInProgram.remove(lists.listsInProgram.get(i));
             }
 
+        //Update our ObservableList and ListView for the lists.
         listOfLists.remove(listName);
         taskListView.getItems().clear();
 
-
     }
 
+    //Create a function to remove the task selected by the user from the list selected by the user.
     @FXML
     private void removeTaskBtnClicked(Event e) {
+
+        //Save the name of the task selected by the user.
         String taskName = taskListView.getSelectionModel().getSelectedItem();
 
-
+        //Run through the list of lists in the program in our AllList class.
         for(int i = 0; i < lists.listsInProgram.size(); i++) {
+            //Run through the list of tasks each list of the AllList class.
             for(int j = 0; j < lists.listsInProgram.get(i).tasks.size(); j++) {
-
+                //Find the task that is selected by comparing the information of each task to the one we have saved.
                 if(lists.listsInProgram.get(i).tasks.get(j).toString().equals(taskName)) {
+                    //Once the task is found remove it from the list of tasks where it was.
                     lists.listsInProgram.get(i).tasks.remove(lists.listsInProgram.get(i).tasks.get(j));
-
+                    //Exit the for loop.
                     break;
                 }
-
-
             }
         }
 
+        //Update our ObservableList and ListView for tasks.
         listOfTasks.remove(taskName);
+        updateTaskListView();
     }
 
+    //Create a function to mark the task selected by the user as complete or incomplete.
     @FXML
     private void markAsCompletedBtnClicked(Event e) {
 
+        //Save the name of the task selected by the user.
         String taskName = taskListView.getSelectionModel().getSelectedItem();
+
+        //Create a temporary list to save the list in which our task is found.
+        //We will use this list to update the items of our task ListView once a task is modified.
         List temp = new List("a");
 
+        //Run through the list of lists in the program in our AllList class.
         for(int i = 0; i < lists.listsInProgram.size(); i++) {
+            //Run through the list of tasks each list of the AllList class.
             for(int j = 0; j < lists.listsInProgram.get(i).tasks.size(); j++) {
+                //Find the task that is selected by comparing the information of each task to the one we have saved.
                 if(lists.listsInProgram.get(i).tasks.get(j).toString().equals(taskName)) {
+                    //Once the task selected is found, if the status of the list is incomplete...
                     if(lists.listsInProgram.get(i).tasks.get(j).getCompleted() == false)
+                        //change the status to complete using the setCompleted function in the Task class.
                         lists.listsInProgram.get(i).tasks.get(j).setCompleted(true);
+                    //If the status of the task is complete...
                     else
+                        //change the status to incomplete using the setCompleted function in the Task class.
                         lists.listsInProgram.get(i).tasks.get(j).setCompleted(false);
 
+                    //Save the list we found the modified task on to the temp list.
                     temp = lists.listsInProgram.get(i);
+
+                    //Exit the for loop.
                     break;
                 }
             }
         }
 
+        //Clear the ObservableList of tasks.
         listOfTasks.clear();
+        //Update the ObservableList of tasks with the list that contains the updated tasks
         for(int i = 0; i < temp.tasks.size(); i++)
             listOfTasks.add(temp.tasks.get(i));
 
+        //Update the ListView of tasks.
         updateTaskListView();
-
     }
 
+    //Create a function to display all the tasks of a selected list.
+    //This class can be used so the user can go back to viewing all tasks from complete or incomplete only task view mode.
     @FXML
     private void viewAllTasksBtnClicked(Event e) {
+        //Use the updateTaskListView function to update the task ListView (this function also updates the task ObservableList).
+        //This shows the original list of tasks in the list selected in the tasks ListView.
         updateTaskListView();
     }
 
+    //Create a class to display only the complete tasks in the selected list.
     @FXML
     private void viewCompletedBtnClicked(Event e) {
 
+        //Disable buttons that are not usable when in complete or incomplete task only view mode.
         markAsCompletedBtn.setDisable(true);
         editTaskBtn.setDisable(true);
         removeTaskBtn.setDisable(true);
 
+        //Save the name of the list that the user selected.
         String listName = mainListView.getSelectionModel().getSelectedItem();
-        List temp = new List("a");
 
+        //Run through the list of lists in the program in our AllList class.
         for(int i = 0; i < lists.listsInProgram.size(); i++)
+            //Find the list that is selected by comparing the name of each list to the one we have saved.
             if(lists.listsInProgram.get(i).getName().equals(listName)) {
+                //Once the list is found create a temporary list of complete items and initialize it with the showCompleteTasks function in the List class.
                 ArrayList<Task> completed = lists.listsInProgram.get(i).showCompleteTasks();
+                //Clear the ListView for the tasks.
                 listOfTasks.clear();
+                //Populate the ListView for the tasks with each task in the completed task list.
                 for(int j = 0; j < completed.size(); j++)
                     listOfTasks.add(completed.get(j));
             }
@@ -342,36 +400,44 @@ public class TodoListController implements Initializable {
     @FXML
     private void viewNotCompletedBtnClicked(Event e) {
 
+        //Disable buttons that are not usable when in complete or incomplete task only view mode.
         markAsCompletedBtn.setDisable(true);
-        String listName = mainListView.getSelectionModel().getSelectedItem();
-        List temp = new List("a");
+        editTaskBtn.setDisable(true);
+        removeTaskBtn.setDisable(true);
 
+        //Save the name of the list that the user selected.
+        String listName = mainListView.getSelectionModel().getSelectedItem();
+
+        //Run through the list of lists in the program in our AllList class.
         for(int i = 0; i < lists.listsInProgram.size(); i++)
+            //Find the list that is selected by comparing the name of each list to the one we have saved.
             if(lists.listsInProgram.get(i).getName().equals(listName)) {
+                //Once the list is found create a temporary list of incomplete items and initialize it with the showIncompleteTasks function in the List class.
                 ArrayList<Task> incomplete = lists.listsInProgram.get(i).showIncompleteTasks();
+                //Clear the ListView for the tasks.
                 listOfTasks.clear();
+                //Populate the ListView for the tasks with each task in the incomplete task list.
                 for(int j = 0; j < incomplete.size(); j++)
                     listOfTasks.add(incomplete.get(j));
             }
-
     }
 
-
-
-
-    public void exportSelectedBtnClicked(ActionEvent actionEvent) {
+    @FXML
+    private void exportSelectedBtnClicked(Event e) {
         //Call exportList in the AllList class
         //This will export the information of the selected lists to a file
         //The list view remains the same
     }
 
-    public void importListBtnClicked(ActionEvent actionEvent) {
+    @FXML
+    private void importListBtnClicked(Event e) {
         //Call importList in the AllList class
         //This will import a list from a file into the list of lists in the AllList class
         //This new list will now show in the list view
     }
 
-    public void sortByDateBtnClicked(ActionEvent actionEvent) {
+    @FXML
+    private void sortByDateBtnClicked(Event e) {
         //Call sortByDate in the List class
         //Display the arrayList this function returns in the list view for tasks
     }
