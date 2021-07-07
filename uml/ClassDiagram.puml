@@ -38,8 +38,8 @@ class AllLists {
     + createAllLists()
 
     + addList(List list)
-    + removeList(List list)
-    + editList(List list)
+    + removeList(String list)
+    + editList(String list, String name)
     + importList(File file)
     + exportList(File file, List list)
 
@@ -58,9 +58,9 @@ class List {
     + getTasks()
 
     + addTask(Task task)
-    + editTask(Task task)
-    + removeTask(Task task)
-    + markTaskCompleted(Boolean completed)
+    + editTask(String task, String name, String date)
+    + removeTask(String task)
+    + markTaskCompleted(String task, Boolean completed)
     + showCompleteTasks()
     + showIncompleteTasks()
     + showAllTasks()

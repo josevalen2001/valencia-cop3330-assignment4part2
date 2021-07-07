@@ -7,6 +7,7 @@ package ucf.assignments;
  */
 
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -14,13 +15,12 @@ public class AllLists {
 
     //Create attributes for class
     //Only attribute we need for this class is an ArrayList of lists
+    ArrayList<List> listsInProgram;
 
-    //ArrayList<List> listsInProgram;
+    public AllLists() {
 
-    public void createAllLists() {
-
-        //Initialize the listsInPrograms here
-        //Should initialize it as an empty ArrayList of lists
+        //Initialize the attributes of the class
+        listsInProgram = new ArrayList<List>();
 
     }
 
@@ -28,25 +28,32 @@ public class AllLists {
 
         //Take in a list as a parameter
         //Add it to listsInProgram
+        listsInProgram.add(list);
 
 
     }
 
-    public void removeList(List list) {
+    public void removeList(String list) {
 
-        //Take in a list as a parameter
-        //Save the name of the list
-        //Look for the list in listsInPrograms
-        //Remove that list
+        //Look for the list
+        for(int i = 0; i < listsInProgram.size(); i++)
+            //List is found
+            if(listsInProgram.get(i).toString().equals(list))
+                //Remove the list
+                listsInProgram.remove(i);
+
+        //If there is no list equal to the one passed nothing will happen
 
     }
 
-    public void editList(List list, String name) {
+    public void editList(String list, String name) {
 
-        //Take in a list as a parameter
-        //Save the name of the list
-        //Look for the list in listsInPrograms
-        //Use the setter method for the name of the list in the List class to change the name
+        //Look for the list
+        for(int i = 0; i < listsInProgram.size(); i++)
+            //List is found
+            if(listsInProgram.get(i).toString().equals(list))
+                //Use the setter method in the list class to change its name
+                listsInProgram.get(i).setName(name);
 
     }
 
@@ -59,10 +66,15 @@ public class AllLists {
 
     }
 
-    public void exportList(File file, List list) {
+    public void exportList(File file, String list) {
 
-        //Take in a file and a list as a parameter
-        //Write the information from the list taken in into the file in a specific format
+        List listToExport = new List("name");
+
+        for(int i = 0; i < listsInProgram.size(); i++)
+            if(listsInProgram.get(i).toString().equals(list))
+                listToExport = listsInProgram.get(i);
+
+
 
     }
 

@@ -11,95 +11,116 @@ public class List {
 
     //Create the attributes for list
     //We need an attribute for the name of the list and its tasks
-    //String name;
-    //ArrayList<Task> tasks;
+    String name;
+    ArrayList<Task> tasks;
 
-    public void createList(String name) {
+    public List(String name) {
 
-        //Initialize the name attribute with the string taken is as a parameter with the setName func
-        //Initialize the ArrayList parameter as an empty ArrayList of Task
+        //Initialize the attributes for the class
+        this.name = name;
+        tasks = new ArrayList<Task>();
 
     }
 
     public void setName(String name) {
 
-        //Take in a string as a parameter
         //Change the name attribute to whatever the string we took in as a parameter is
+        this.name = name;
 
     }
 
     public String getName() {
 
         //Return the attribute name
-        return null;
+        return name;
     }
 
     public ArrayList<Task> getTasks() {
 
         //Return the attribute tasks
-        return null;
+        return tasks;
 
     }
 
     public void addTask(Task task) {
 
-        //Take in a task as a parameter
         //Add the task to the tasks ArrayList
+        tasks.add(task);
 
     }
 
-    public void editTask(Task task, String name, String date) {
+    public void editTask(String task, String name, String date) {
 
-        //Take in a task as a parameter
-        //Save the task name
-        //Look through tasks arrayList until we find the desired task
-        //Modify the name and date of the task with the setter methods in the Task class
+        //Look for the task
+        for(int i = 0; i < tasks.size(); i++)
+            //Find the task
+            if(tasks.get(i).toString().equals(task)) {
+                //Modify attributes for the task
+                tasks.get(i).setDesc(name);
+                tasks.get(i).setDate(date);
+            }
 
-    }
-
-    public void removeTask(Task task) {
-
-        //Take in a task as a parameter
-        //Save the task name
-        //Look through tasks arrayList until we find the desired task
-        //Remove that task
 
     }
 
-    public void markTaskCompleted(Boolean completed) {
+    public void removeTask(String task) {
 
-        //Take in a task as a parameter
-        //Save the task name
-        //Look through tasks arrayList until we find the desired task
-        //Use the setter method in Task class to modify the attribute
+        //Look for task
+        for(int i = 0; i < tasks.size(); i++)
+            //Find the task
+            if(tasks.get(i).toString().equals(task))
+                //Remove the task
+                tasks.remove(i);
+
+    }
+
+    public void markTaskCompleted(String task, Boolean completed) {
+
+        //Look for task
+        for(int i = 0; i < tasks.size(); i++)
+            //Find the task
+            if(tasks.get(i).toString().equals(task))
+                //Modify the task
+                tasks.get(i).setCompleted(true);
 
     }
 
     public ArrayList<Task> showCompleteTasks() {
 
         //Create an ArrayList for the completed tasks
-        //Go through the tasks ArrayList and see which ones are completed
-        //Save the completed ones to the new ArrayList
-        //Return this array
+        ArrayList<Task> completedTasks = new ArrayList<Task>();
 
-        return null;
+        //Go through the tasks ArrayList and look for completed tasks
+        for(int i = 0; i < tasks.size(); i++)
+            //Find completed tasks
+            if(tasks.get(i).getCompleted() == true)
+                //Save the completed ones to the new ArrayList
+                completedTasks.add(tasks.get(i));
+
+        //Return this array
+        return completedTasks;
     }
     public ArrayList<Task> showIncompleteTasks(){
 
         //Create an ArrayList for the incomplete tasks
-        //Go through the tasks ArrayList and see which ones are not completed
-        //Save the not completed ones to the new ArrayList
-        //Return this array
+        ArrayList<Task> incompleteTasks = new ArrayList<Task>();
 
-        return null;
+        //Go through the tasks ArrayList and look for incomplete tasks
+        for(int i = 0; i < tasks.size(); i++)
+            //Find incomplete tasks
+            if(tasks.get(i).getCompleted() == false)
+                //Save the incomplete ones to the new ArrayList
+                incompleteTasks.add(tasks.get(i));
+
+        //Return this array
+        return incompleteTasks;
 
     }
 
     public ArrayList<Task> showAllTasks(){
 
         //Uses getTasks to return the arrayList with all the tasks
-
-        return null;
+        return getTasks();
 
     }
 
@@ -118,8 +139,7 @@ public class List {
     public String toString(){
 
         //Returns a string with the name of the List
-
-        return null;
+        return getName();
     }
 
 }
