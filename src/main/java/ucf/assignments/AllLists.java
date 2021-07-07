@@ -9,6 +9,8 @@ package ucf.assignments;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AllLists {
@@ -66,16 +68,31 @@ public class AllLists {
 
     }
 
-    public void exportList(File file, String list) {
+    public String exportList(String list) {
 
-        List listToExport = new List("name");
+        //Run through all the lists in the list of lists.
+        for(int i = 0; i < listsInProgram.size(); i++) {
+            //Find the list that has been passed by name.
+            if (listsInProgram.get(i).toString().equals(list)) {
+                try {
+                    //Create a writer and file.
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.home")+"\\Desktop\\" + listsInProgram.get(i).toString() + ".txt"));
+                    //Write the name of the list in the first line.
+                    bw.write(listsInProgram.get(i).toString() + "\n");
+                    //Write the tasks of that list in the other lines.
+                    for(int j = 0; j < listsInProgram.get(i).tasks.size(); j++)
+                        bw.write(listsInProgram.get(i).tasks.get(j).toString() + "\n");
+                    bw.close();
+                    return "Successful";
+                } catch (IOException e){
 
-        for(int i = 0; i < listsInProgram.size(); i++)
-            if(listsInProgram.get(i).toString().equals(list))
-                listToExport = listsInProgram.get(i);
+                    return "Failure";
+                }
 
+            }
+        }
 
-
+        return "failure";
     }
 
 }

@@ -124,16 +124,6 @@ public class List {
 
     }
 
-    public ArrayList<Task> sortByDate() {
-
-        //Create a new arrayList
-        //Copy all the tasks into it
-        //Sort this arrayList by date
-        //Return it
-
-        return null;
-
-    }
 
     @Override
     public String toString(){

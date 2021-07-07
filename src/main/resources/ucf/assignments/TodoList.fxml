@@ -37,11 +37,10 @@
                   <DatePicker fx:id="editTaskDatePicker" layoutX="66.0" layoutY="371.0" prefHeight="25.0" prefWidth="126.0" promptText="Select new date" />
                   <TextField fx:id="editTaskName" layoutX="198.0" layoutY="371.0" prefHeight="25.0" prefWidth="213.0" promptText="Enter new task description" />
                   <Button fx:id="viewNotCompletedBtn" layoutX="286.0" layoutY="436.0" mnemonicParsing="false" onAction="#viewNotCompletedBtnClicked" text="View Not Completed" />
-                  <Button fx:id="markAsCompletedBtn" layoutX="122.0" layoutY="403.0" mnemonicParsing="false" onAction="#markAsCompletedBtnClicked" text="Set Complete/Incomplete" />
-                  <Button fx:id="sortByDateBtn" layoutX="25.0" layoutY="403.0" mnemonicParsing="false" onAction="#sortByDateBtnClicked" text="Sort by Date" />
+                  <Button fx:id="markAsCompletedBtn" layoutX="53.0" layoutY="403.0" mnemonicParsing="false" onAction="#markAsCompletedBtnClicked" text="Set Complete/Incomplete" />
                   <Button fx:id="viewAllTasksBtn" layoutX="21.0" layoutY="436.0" mnemonicParsing="false" onAction="#viewAllTasksBtnClicked" text="View All Tasks" />
-                  <Button fx:id="viewCompletedBtn" layoutX="146.0" layoutY="436.0" mnemonicParsing="false" onAction="#viewCompletedBtnClicked" text="View Completed" />
-                  <Button fx:id="removeTaskBtn" layoutX="306.0" layoutY="403.0" mnemonicParsing="false" onAction="#removeTaskBtnClicked" text="Remove Item" />
+                  <Button fx:id="viewCompletedBtn" layoutX="153.0" layoutY="436.0" mnemonicParsing="false" onAction="#viewCompletedBtnClicked" text="View Completed" />
+                  <Button fx:id="removeTaskBtn" layoutX="250.0" layoutY="403.0" mnemonicParsing="false" onAction="#removeTaskBtnClicked" text="Remove Item" />
                </children></AnchorPane>
         </items>
       </SplitPane>

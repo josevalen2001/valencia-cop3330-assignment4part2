@@ -8,8 +8,8 @@
 
 class TodoList {
 
-    + main()
-    + start()
+    + main(): void
+    + start(): void
 
 }
 
@@ -40,26 +40,24 @@ class TodoListController {
     - Button viewAllTasksBtn
     - Button viewCompletedBtn
     - Button viewNotCompletedBtn
-    - Button sortByDateBtn
     - Button exportSelectedBtn
     - Button importListBtn
 
-    + initialize(URL url, ResourceBundle rb)
+    + initialize(URL url, ResourceBundle rb): void
 
-    - updateTaskListView()
-    - addListBtnClicked(Event e)
-    - addTaskBtnClicked(Event e)
-    - editListBtnClicked(Event e)
-    - editTaskBtnClicked(Event e)
-    - removeListBtnClicked(Event e)
-    - removeTaskBtnClicked(Event e)
-    - markAsCompletedBtnClicked(Event e)
-    - viewAllTasksBtnClicked(Event e)
-    - viewCompletedBtnClicked(Event e)
-    - viewNotCompletedBtnClicked(Event e)
-    - exportSelectedBtnClicked(Event e)
-    - importListBtnClicked(Event e)
-    - sortByDateBtnClicked(Event e)
+    - updateTaskListView(): void
+    - addListBtnClicked(Event e): void
+    - addTaskBtnClicked(Event e): void
+    - editListBtnClicked(Event e): void
+    - editTaskBtnClicked(Event e): void
+    - removeListBtnClicked(Event e): void
+    - removeTaskBtnClicked(Event e): void
+    - markAsCompletedBtnClicked(Event e): void
+    - viewAllTasksBtnClicked(Event e): void
+    - viewCompletedBtnClicked(Event e): void
+    - viewNotCompletedBtnClicked(Event e): void
+    - exportSelectedBtnClicked(Event e): void
+    - importListBtnClicked(Event e): void
 }
 
 class AllLists {
@@ -68,11 +66,11 @@ class AllLists {
 
     + AllLists()
 
-    + addList(List list)
-    + removeList(String list)
-    + editList(String list, String name)
-    + importList(File file)
-    + exportList(File file, List list)
+    + addList(List list): void
+    + removeList(String list): void
+    + editList(String list, String name): void
+    + importList(File file): void
+    + exportList(String list): String
 
 
 }
@@ -84,20 +82,19 @@ class List {
 
     + List(String name)
 
-    + setName(String name)
-    + getName()
-    + getTasks()
+    + setName(String name): void
+    + getName(): String
+    + getTasks(): ArrayList<Task>
 
-    + addTask(Task task)
-    + editTask(String task, String name, String date)
-    + removeTask(String task)
-    + markTaskCompleted(String task, Boolean completed)
-    + showCompleteTasks()
-    + showIncompleteTasks()
-    + showAllTasks()
-    + sortByDate()
+    + addTask(Task task): void
+    + editTask(String task, String name, String date): void
+    + removeTask(String task): void
+    + markTaskCompleted(String task, Boolean completed): void
+    + showCompleteTasks(): ArrayList<Task>
+    + showIncompleteTasks(): ArrayList<Task>
+    + showAllTasks(): ArrayList<Task>
 
-    + toString()
+    + toString(): String
 
 
 }
@@ -110,21 +107,21 @@ class Task {
 
     + Task(String desc, String date, Boolean completed)
 
-    + setDesc(String desc)
-    + setDate(String date)
-    + setCompleted(Boolean completed)
-    + getDesc()
-    + getDate()
-    + getCompleted()
+    + setDesc(String desc): void
+    + setDate(String date): void
+    + setCompleted(Boolean completed): void
+    + getDesc(): String
+    + getDate(): String
+    + getCompleted(): boolean
 
-    + toString()
+    + toString(): String
 
 
 }
 
-javafx.Initializable <|--- TodoListController
+javafx.Initializable <|... TodoListController
 javafx.Application <|-- TodoList
-TodoList -- TodoListController
+TodoList <-- TodoListController
 TodoListController *-> AllLists
 AllLists *--> List
 List *--> Task

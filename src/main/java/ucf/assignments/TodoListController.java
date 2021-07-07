@@ -78,8 +78,6 @@ public class TodoListController implements Initializable {
     @FXML
     private Button viewNotCompletedBtn;
     @FXML
-    private Button sortByDateBtn;
-    @FXML
     private Button exportSelectedBtn;
     @FXML
     private Button importListBtn;
@@ -424,9 +422,12 @@ public class TodoListController implements Initializable {
 
     @FXML
     private void exportSelectedBtnClicked(Event e) {
-        //Call exportList in the AllList class
-        //This will export the information of the selected lists to a file
-        //The list view remains the same
+
+        //Save the name of the list selected by the user.
+        String listName = mainListView.getSelectionModel().getSelectedItem();
+        //Export the list.
+        lists.exportList(listName);
+
     }
 
     @FXML
@@ -436,11 +437,6 @@ public class TodoListController implements Initializable {
         //This new list will now show in the list view
     }
 
-    @FXML
-    private void sortByDateBtnClicked(Event e) {
-        //Call sortByDate in the List class
-        //Display the arrayList this function returns in the list view for tasks
-    }
 }
 
 

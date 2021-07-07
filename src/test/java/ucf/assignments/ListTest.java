@@ -7,6 +7,8 @@ package ucf.assignments;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListTest {
@@ -15,10 +17,14 @@ class ListTest {
     @Test
     void addTask() {
 
-        //Create an arrayList of tasks with the one task we want added
-        //Create a List class
-        //Add a task to the arrayList of tasks in the List class
-        //Check if both arrayList contain the same
+        //Create a List class.
+        List test = new List("Test List");
+        //Create a task to add.
+        Task testTask = new Task("Test Task", "2021-07-07", false);
+        //Add the task.
+        test.addTask(testTask);
+        //Check if there is one task in the list.
+        assertEquals(1, test.tasks.size());
 
     }
 
@@ -26,11 +32,16 @@ class ListTest {
     @Test
     void editTask() {
 
-        //Save the new description and date we want for the task
-        //Create a List class
-        //Add a tasks with a description and date that is not the one we want
-        //Change the name and date for the one we want
-        //Compare the toStrings for each tasks
+        //Create a List class.
+        List test = new List("Test List");
+        //Create a task to add.
+        Task testTask = new Task("Test Task", "2021-07-07", false);
+        //Add the task.
+        test.addTask(testTask);
+        //Edit the task.
+        test.editTask("Test Task || 2021-07-07 || Incomplete", "Test Task 2", "2021-07-08");
+        //Make sure that task is in the array with the new information.
+        assertEquals("Test Task 2 || 2021-07-08 || Incomplete", test.tasks.get(0).toString());
 
     }
 
@@ -38,11 +49,16 @@ class ListTest {
     @Test
     void removeTask() {
 
-        //Create an empty arrayList of tasks
-        //Create a List class
-        //Add a task to the list of tasks in the List class
-        //Remove the task we just added
-        //Compare both arrayLists
+        //Create a List class.
+        List test = new List("Test List");
+        //Create a task to add.
+        Task testTask = new Task("Test Task", "2021-07-07", false);
+        //Add the task.
+        test.addTask(testTask);
+        //Remove the task we just added.
+        test.removeTask("Test Task || 2021-07-07 || Incomplete");
+        //Check if the array is empty.
+        assertEquals(0, test.tasks.size());
 
     }
 
@@ -50,10 +66,16 @@ class ListTest {
     @Test
     void markTaskCompleted() {
 
-        //Create a List class
-        //Add a tasks to the list of tasks in the List class
-        //Set its completed attribute to true
+        //Create a List class.
+        List test = new List("Test List");
+        //Create a task to add.
+        Task testTask = new Task("Test Task", "2021-07-07", false);
+        //Add the task.
+        test.addTask(testTask);
+        //Set its completed attribute to true.
+        test.markTaskCompleted("Test Task || 2021-07-07 || Incomplete", true);
         //Check is its true
+        assertEquals(true, test.tasks.get(0).getCompleted());
 
     }
 
@@ -61,11 +83,23 @@ class ListTest {
     @Test
     void showCompleteTasks() {
 
-        //Create a List class
-        //Add one two tasks to the list of tasks in the list class
-        //Mark one of them as complete
+        //Create a List class.
+        List test = new List("Test List");
+        //Create a task to add.
+        Task testTask = new Task("Test Task", "2021-07-07", false);
+        //Add the task.
+        test.addTask(testTask);
+        //Set its completed attribute to true.
+        test.markTaskCompleted("Test Task || 2021-07-07 || Incomplete", true);
+        //Create another task.
+        Task testTask2 = new Task("Test Task 2", "2021-07-07", false);
+        //Add that task.
+        test.addTask(testTask2);
         //Run showCompleteTasks and save the arrayList it returns
-        //Check if the status of the task in that list is true
+        ArrayList<Task> completed = test.showCompleteTasks();
+        //Check if there is one task in that list.
+        assertEquals(1, completed.size());
+
 
     }
 
@@ -73,11 +107,22 @@ class ListTest {
     @Test
     void showIncompleteTasks() {
 
-        //Create a List class
-        //Add one two tasks to the list of tasks in the list class
-        //Mark one of them as complete
-        //Run showIncompleteTasks and save the arrayList it returns
-        //Check if the status of the task in that list is false
+        //Create a List class.
+        List test = new List("Test List");
+        //Create a task to add.
+        Task testTask = new Task("Test Task", "2021-07-07", false);
+        //Add the task.
+        test.addTask(testTask);
+        //Set its completed attribute to true.
+        test.markTaskCompleted("Test Task || 2021-07-07 || Incomplete", true);
+        //Create another task.
+        Task testTask2 = new Task("Test Task 2", "2021-07-07", false);
+        //Add that task.
+        test.addTask(testTask2);
+        //Run showCompleteTasks and save the arrayList it returns
+        ArrayList<Task> incomplete = test.showIncompleteTasks();
+        //Check if there is one task in that list.
+        assertEquals(1, incomplete.size());
 
     }
 
@@ -85,22 +130,23 @@ class ListTest {
     @Test
     void showAllTasks() {
 
-        //Create an arrayList with some tasks
-        //Create a list class
-        //Add the same tasks to it that were on the arrayList we created
-        //Run showAllTasks and save the arrayList is returns
-        //Compare the arrayLists
+        //Create a List class.
+        List test = new List("Test List");
+        //Create a task to add.
+        Task testTask = new Task("Test Task", "2021-07-07", false);
+        //Add the task.
+        test.addTask(testTask);
+        //Set its completed attribute to true.
+        test.markTaskCompleted("Test Task || 2021-07-07 || Incomplete", true);
+        //Create another task.
+        Task testTask2 = new Task("Test Task 2", "2021-07-07", false);
+        //Add that task.
+        test.addTask(testTask2);
+        //Run showCompleteTasks and save the arrayList it returns.
+        ArrayList<Task> allTasks = test.showAllTasks();
+        //Check if there is two tasks in the list.
+        assertEquals(2, allTasks.size());
 
     }
 
-    @Test
-    void sortByDate(){
-
-        //Create an arrayList with tasks sorted by date
-        //Create a list class
-        //Add the same tasks we added to the other arrayList but not sorted
-        //Run sortByDate and save the arrayList it returns
-        //Compare the arrayLists
-
-    }
 }

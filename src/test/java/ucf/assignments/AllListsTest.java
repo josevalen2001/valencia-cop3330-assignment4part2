@@ -11,42 +11,56 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AllListsTest {
 
-    //Test for behavior #6
+
     @Test
     void addList() {
 
-        //Create an ArrayList of list with a single list in it
-        //Create an AllLists class
-        //Add a list like the one in the arrayList to the AllList
-        //Check if both arrayList are the same
-
+        //Create an AllLists class.
+        AllLists test  = new AllLists();
+        //Create a list to add.
+        List testList = new List("Test List");
+        //Add a list like the one in the arrayList to the AllList.
+        test.addList(testList);
+        //Check if the list of lists has one list in it.
+        assertEquals(1, test.listsInProgram.size());
     }
 
-    //Test for behavior #7
+
     @Test
     void removeList() {
 
-        //Create an ArrayList of list without anything in it
-        //Create an AllList class
-        //Add a list to the list of list in the AllList class
-        //Remove the list we just added
-        //Check if both arrayList are the same
+        //Create an AllLists class.
+        AllLists test  = new AllLists();
+        //Create a list to add.
+        List testList = new List("Test List");
+        //Add a list like the one in the arrayList to the AllList.
+        test.addList(testList);
+        //Remove the list we just added.
+        test.removeList("Test List");
+        //Check if there are no lists.
+        assertEquals(0, test.listsInProgram.size());
 
     }
 
-    //Test for behavior #8
+
     @Test
     void editList() {
 
-        //Create a string with the desired new name
-        //Create an AllList class
-        //Add a list with a different name
-        //Change the list's name to the desired
-        //Check if they are the same
+        //Create an AllLists class.
+        AllLists test  = new AllLists();
+        //Create a list to add.
+        List testList = new List("Test List");
+        //Add a list like the one in the arrayList to the AllList.
+        test.addList(testList);
+        //Change the list's name to the desired new name.
+        test.editList("Test List", "Test List 2");
+        //Check if the list has the new name.
+        assertEquals("Test List 2", test.listsInProgram.get(0).getName());
+
 
     }
 
-    //Test for behavior #17-18
+
     @Test
     void importList() {
 
@@ -57,15 +71,26 @@ class AllListsTest {
 
     }
 
-    //Test for behavior #19-20
+
     @Test
     void exportList() {
 
-        //Create a file with the information of the file we want to export
-        //Create an AllList class
-        //Add a list to the AllList class
-        //Export it and save that file
+        //Create an AllLists class.
+        AllLists test  = new AllLists();
+        //Create a list to add.
+        List testList = new List("Test List");
+        //Add a list like the one in the arrayList to the AllList.
+        test.addList(testList);
+        //Create tasks.
+        Task testTask = new Task("Test Task", "2021-07-07", true);
+        Task testTask2 = new Task("Test Task 2", "2021-07-08", false);
+        //Add the task.
+        test.listsInProgram.get(0).addTask(testTask);
+        test.listsInProgram.get(0).addTask(testTask2);
+        //Export it and save return statement to know if it was successful.
+        String status = test.exportList("Test List");
         //Compare if both files are the same
+        assertEquals("Successful", status);
 
     }
 }
