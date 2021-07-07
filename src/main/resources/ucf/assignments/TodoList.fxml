@@ -22,7 +22,7 @@
                   <Button fx:id="editListBtn" layoutX="15.0" layoutY="374.0" mnemonicParsing="false" onAction="#editListBtnClicked" text="Edit" />
                   <TextField fx:id="editListName" layoutX="65.0" layoutY="374.0" prefHeight="25.0" prefWidth="199.0" promptText="Enter new name for TODO List" />
                   <Button fx:id="removeListBtn" layoutX="79.0" layoutY="406.0" mnemonicParsing="false" onAction="#removeListBtnClicked" prefHeight="25.0" prefWidth="101.0" text="Remove List" />
-                  <Button fx:id="exportSelectedBtn" layoutX="16.0" layoutY="437.0" mnemonicParsing="false" onAction="#exportSelectedBtnClicked" text="Export selected..." />
+                  <Button fx:id="exportSelectedBtn" layoutX="16.0" layoutY="437.0" mnemonicParsing="false" onAction="#exportSelectedBtnClicked" text="Export selected" />
                   <Button fx:id="importListBtn" layoutX="139.0" layoutY="437.0" mnemonicParsing="false" onAction="#importListBtnClicked" text="Import a TODO List" />
                </children>
             </AnchorPane>
@@ -40,7 +40,7 @@
                   <Button fx:id="markAsCompletedBtn" layoutX="53.0" layoutY="403.0" mnemonicParsing="false" onAction="#markAsCompletedBtnClicked" text="Set Complete/Incomplete" />
                   <Button fx:id="viewAllTasksBtn" layoutX="21.0" layoutY="436.0" mnemonicParsing="false" onAction="#viewAllTasksBtnClicked" text="View All Tasks" />
                   <Button fx:id="viewCompletedBtn" layoutX="153.0" layoutY="436.0" mnemonicParsing="false" onAction="#viewCompletedBtnClicked" text="View Completed" />
-                  <Button fx:id="removeTaskBtn" layoutX="250.0" layoutY="403.0" mnemonicParsing="false" onAction="#removeTaskBtnClicked" text="Remove Item" />
+                  <Button fx:id="removeTaskBtn" layoutX="250.0" layoutY="403.0" mnemonicParsing="false" onAction="#removeTaskBtnClicked" text="Remove Task" />
                </children></AnchorPane>
         </items>
       </SplitPane>

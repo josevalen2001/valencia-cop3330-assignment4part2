@@ -31,11 +31,14 @@ public class TodoList extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("TO-DO List");
+            primaryStage.setResizable(false);
             primaryStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
 
 
