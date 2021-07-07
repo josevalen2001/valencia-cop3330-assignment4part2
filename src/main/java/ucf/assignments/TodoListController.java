@@ -149,7 +149,7 @@ public class TodoListController implements Initializable {
 
         //Exit the function if the user did not enter a name for the task.
         //This means that the button will be clicked, but nothing will happen.
-        if(newTaskName.getText().isEmpty())
+        if(newTaskName.getText().isEmpty() || editTaskName.getText().length() > 256)
             return;
 
         //If the user did not enter a date for the task, make the DatePicker default to today's date. This date can be changed later.
@@ -216,7 +216,7 @@ public class TodoListController implements Initializable {
 
         //Exit the function if the user did not enter a new name for the task.
         //This means that the button will be clicked, but nothing will happen.
-        if(editTaskName.getText().isEmpty())
+        if(editTaskName.getText().isEmpty() || editTaskName.getText().length() > 256)
             return;
 
         //If the user did not enter a new date for the task, make the DatePicker default to today's date. This date can be changed later.
